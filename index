@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shimabun Office Support</title>
+  <style>
+    
+    html{
+      font-family: 'Noto Serif JP', serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    html a{
+      text-decoration: none;
+    }
+
+    ul{
+      padding: 0;
+    }
+
+    p{
+      margin: 0;
+    }
+
+    body{
+      width: 100%;
+      margin: 0 auto;
+    }
+    body a{
+      text-decoration: none;
+    }
+
+    .HeaderBox{
+      width: 100%;
+      height: 55vw;
+    }
+
+    video{
+      position: relative;
+      width: 100%;
+    }
+
+    .cover{
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .HeaderName{
+      font-size: 20px;
+      color: #ffffff;
+      position: absolute;
+      bottom: 23vw;
+      padding-left: 50px;
+      transition: all 0.8s;
+      z-index: 20;
+      opacity: 0;
+      animation-name:HeaderName;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes HeaderName{
+      0%{
+        opacity: 0;
+        transform: translateY(0);
+      }
+      100%{
+        opacity: 1;
+        transform: translateY(30px);
+      }
+    }
+
+    .pointanim{
+      transition: all 0.8s;
+      z-index: 20;
+      opacity: 0;
+      animation: infinite;
+      animation-name:pointanim;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes pointanim{
+      0%{
+        opacity: 1;
+        transform: translateY(0);
+      }
+      50%{
+        opacity: 1;
+        transform: translateY(30px);
+      }
+      100%{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .HFontSize{
+      font-size: 40px;
+    }
+
+    .inline-box {
+      color: #ffffff;
+      font-size: 14px;
+      width: 400px;
+      height: 400px;
+      overflow: auto;
+      background: #22222200;
+      border: 5px solid #999999;
+      padding: 20px 40px 40px 40px;
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
+
+    .secondcontainer{
+      background: url(bg-software.jpeg) no-repeat center;
+      background-size: cover;
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      text-align: center;
+      margin: 0 100px 0 100px ;
+    }
+
+    .secondcontainer:before{
+      content: '';
+      background: inherit;/*.bgImageで設定した背景画像を継承する*/
+      -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
+      -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+      filter: blur(5px);
+      position: absolute;
+      /*ブラー効果で画像の端がボヤけた分だけ位置を調整*/
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      z-index: -1;/*重なり順序を一番下にしておく*/
+    }
+
+    .thirdcontainer{
+      background: url(bg-computer.jpeg) no-repeat center;
+      background-size: cover;
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      text-align: center;
+      margin: 150px 100px 0 100px ;
+    }
+
+    .thirdcontainer:before{
+      content: '';
+      background: inherit;/*.bgImageで設定した背景画像を継承する*/
+      -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
+      -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+      filter: blur(5px);
+      position: absolute;
+      /*ブラー効果で画像の端がボヤけた分だけ位置を調整*/
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      z-index: -1;/*重なり順序を一番下にしておく*/
+    }
+
+    .fourthcontainer{
+      background: url(bg-network.jpeg) no-repeat center;
+      background-size: cover;
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      text-align: center;
+      margin: 150px 100px 0 100px ;
+    }
+
+    .fourthcontainer:before{
+      content: '';
+      background: inherit;/*.bgImageで設定した背景画像を継承する*/
+      -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
+      -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+      filter: blur(5px);
+      position: absolute;
+      /*ブラー効果で画像の端がボヤけた分だけ位置を調整*/
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      z-index: -1;/*重なり順序を一番下にしておく*/
+    }
+
+    .fifthcontainer{
+      background: url(bg-creative.jpeg) no-repeat center;
+      background-size: cover;
+      position: relative;
+      z-index: 0;
+      overflow: hidden;
+      text-align: center;
+      margin: 150px 100px 0 100px ;
+    }
+
+    .fifthcontainer:before{
+      content: '';
+      background: inherit;/*.bgImageで設定した背景画像を継承する*/
+      -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
+      -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+      filter: blur(5px);
+      position: absolute;
+      /*ブラー効果で画像の端がボヤけた分だけ位置を調整*/
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      z-index: -1;/*重なり順序を一番下にしておく*/
+    }
+
+    /*デフォルトのマウスカーソルを非表示にする*/
+    html,body,a {
+      cursor: none;
+    }
+
+    /*独自のマウスカーソルを作成*/
+    .cursor {
+      position: fixed;
+      top: -5px;
+      left: -5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 1000;
+      transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
+      transform: translate(0, 0);
+      pointer-events: none;
+    }
+
+    /*aタグにホバーした時に見た目変化*/
+    .cursor.cursor--hover {
+      top: -20px;
+      left: -20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(205, 114, 113, 0.5);
+    }
+
+    /*動き確認用ボタン*/
+    .btn {
+      display: inline-block;
+      min-width: 300px;
+      margin: 20px;
+      padding: 20px;
+      color: #fff;
+      background-color: #000;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .FadeinX{
+      opacity: 0;
+    transition-duration: .5s;
+    transform: translateX(-100px);
+    transition: 1.5s;
+    }
+
+    .scroll-in {
+    opacity: 1;
+    transform: translate(0, 0);
+}  
+
+.Fadein-X{
+    opacity: 0;
+    transition-duration: .5s;
+    transform: translateX(100px);
+    transition: 1.5s;
+    }
+
+    .scroll-in {
+    opacity: 1;
+    transform: translate(0, 0);
+}  
+
+.FadeinY{
+    opacity: 0;
+    transition-duration: .5s;
+    transform: translateY(100px);
+    transition: 1.5s;
+    }
+
+    .scroll-in {
+    opacity: 1;
+    transform: translate(0);
+}  
+  </style>
+</head>
+<body>
+  <div id="cursor" class="cursor"></div>
+  <header>
+    <div class="HeaderBox">
+      <video src="SosTopMovie-b.mp4" autoplay loop muted class="HeaderMp4" style="position: fixed; z-index: -100;"></video>
+      <div>
+        <p class="HeaderName"><span class="HFontSize">Shimabun</span> Office Support</p>
+      </div>
+    </div>
+    <a href=""><div class="pointanim" style="text-align: right; position: relative; right: 100px; bottom: 250px; margin-bottom: -150px;">
+      <div class="virticalbar" style="border-left:#ffffff solid 1px; height: 70px; display: inline-block;"></div>
+      <div class="allowbar" style="border-left:#ffffff solid 1px; height: 40px; display: inline-block; transform: rotate(30deg);"></div>
+    </div></a>
+    <a href=""><div class="toppoint" style="text-align: right; position: fixed; right: 100px; bottom: 200px; margin-bottom: -150px; transition: .5s; opacity: 0;">
+      <div style="border-left:#ffffff solid 1px; height: 100px; display: inline-block;"></div>
+      <div style="border-left:#ffffff solid 1px; height: 40px; display: inline-block; transform: rotate(150deg); position: relative; bottom: 60px;"></div>
+      <p style="color: #ffffff; position: relative;left: 12px; transform: rotate(90deg);">TOP</p>
+    </div></a>
+  </header>
+  <div class="contents-container" style="background-color: #222222bb; margin: 0 50px 0 50px; padding-top: 100px;">
+    <div class="firstcotainer">
+      <div class="FadeinY" style="display: flex; justify-content: center; align-items:center; gap: 100px; margin: 0  200px 100px 200px;">
+        <div class="inline-box">
+          <ul>
+            <li>
+              <p>2023.11.20</p>
+              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+            </li>
+            <li>
+              <p>2023.11.20</p>
+              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+            </li>
+            <li>
+              <p>2023.11.20</p>
+              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+            </li>
+            <li>
+              <p>2023.11.20</p>
+              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul style="list-style: none; background-color: #99999941; display: inline-block; padding: 20px 20px 20px 20px; border-radius: 10px; width: 200px; height: 400px;">
+            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 0 20px 10px 0; background-color: #99999900;"><p>Announce<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 100px;">&#9698;</span></p></li></a>
+            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 10px 20px 10px 0; background-color: #99999900;"><p>Format<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 122px;">&#9698;</span></p></li></a>
+            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 10px 20px 10px 0; background-color: #99999900;"><p>Document<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 98px;">&#9698;</span></p></li></a>
+            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 10px 20px 10px 0; background-color: #99999900;"><p>Stuff<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 139px;">&#9698;</span></p></li></a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="Fadein-X" style="display: flex; justify-content: center; align-items: center; padding-bottom: 100px;">
+        <div class="titleline" style="border-left: #ffffff solid 1px; height: 70px;  transform: rotate(90deg);"></div>
+        <div style="color: #ffffff;padding-left: 40px; font-size: 25px;">ABOUT US</div>
+      </div>
+    </div>
+    <div class="secondcontainer">
+      <div class="SoftwareBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+        <div class="FadeinX" >
+          <div class="SoftwareFlex" style="display: flex; align-items: last baseline; justify-content: center;">
+            <a href=""><img src="software.jpeg" alt=""  style="width:450px;  box-shadow: 0 0 8px black;"></a>
+            <div class="SoftwareBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative; right: 20px; margin-right: -2vw; box-shadow: 0 0 8px black;">
+              <h3 class="Software" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">SOFTWARE</h3>
+              <p class="SoftwareDetails" style="width: 300px;">ソフトウェアの開発・保守・運用</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="thirdcontainer">
+      <div class="ComputerBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+        <div class="Fadein-X" >
+          <div class="ComputerFlex" style="display: flex; align-items: last baseline; justify-content: center;">
+            <div class="ComputerBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative;left: 20px; box-shadow: 0 0 8px black;">
+              <h3 class="Computer" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">COMPUTER</h3>
+              <p class="ComputerDetails" style="width: 300px;">コンピュータ機器の運用</p>
+            </div>
+            <a href=""><img src="computer.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fourthcontainer">
+      <div class="NetworkBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+        <div class="FadeinX" >
+          <div class="NetworkFlex" style="display: flex; align-items: last baseline; justify-content: center;" >
+            <a href=""><img src="network.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
+            <div class="NetworkBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative; right: 20px; margin-right: -2vw; box-shadow: 0 0 8px black;">
+              <h3 class="Network" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">NETWORK</h3>
+              <p class="NetworkDetails" style="width: 300px;">管理情報通信ネットワークの運用・管理</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fifthcontainer">
+      <div class="CreativeBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+        <div class="Fadein-X" >
+          <div class="CreativeFlex" style="display: flex; align-items: last baseline; justify-content: center;">
+            <div class="CreativeBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative;left: 20px; box-shadow: 0 0 8px black;">
+              <h3 class="Creative" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">CREATIVE</h3>
+              <p class="CreativeDetails" style="width: 300px;">WEBデザイン・バナーやポスターなどのデザイン・HP改修</p>
+            </div>
+            <a href=""><img src="Creative.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer style="background-color: #25148C; width: 100%;">
+    <div>
+        <div>
+          <div></div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+  </footer>
+  <script>
+    // カーソル用のdivタグを取得してcursorに格納
+    var cursor = document.getElementById('cursor'); 
+
+    // カーソル用のdivタグをマウスに追従させる
+    document.addEventListener('mousemove', function (e) {
+        cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
+    });
+
+    // リンクにホバーした時にクラス追加、離れたらクラス削除
+    var link = document.querySelectorAll('a');
+    for (var i = 0; i < link.length; i++) {
+        link[i].addEventListener('mouseover', function (e) {
+            cursor.classList.add('cursor--hover');
+        });
+        link[i].addEventListener('mouseout', function (e) {
+            cursor.classList.remove('cursor--hover');   
+        });
+    }
+
+    let fadeInTargetX = document.querySelectorAll('.FadeinX');
+
+    for (let i = 0; i < fadeInTargetX.length; i++){
+
+      window.addEventListener('scroll', function(){
+          
+          const rect = fadeInTargetX[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
+          const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
+          const offset = rect + scroll; 
+          const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
+          
+          //rect(1000) + scroll(300) =offset(1300) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく
+          //offset(1300) - windowHeight(800) + 200 = 700 
+
+          if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
+              fadeInTargetX[i].classList.add('scroll-in');
+          }
+          
+          
+          //ここから追加
+          else{
+              fadeInTargetX[i].classList.remove('scroll-in');
+          }
+          //ここまで追加
+          
+          
+      });
+    }
+
+    let fadeInTarget_X = document.querySelectorAll('.Fadein-X');
+
+for (let i = 0; i < fadeInTarget_X.length; i++){
+
+  window.addEventListener('scroll', function(){
+      
+      const rect = fadeInTarget_X[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
+      const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
+      const offset = rect + scroll; 
+      const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
+      
+    //rect(1000) + scroll(0) =offset(1000) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく　rect : scroll
+    //offset(1000) - windowHeight(800) + 200 = 400 
+
+      if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
+          fadeInTarget_X[i].classList.add('scroll-in');
+      }
+      
+      
+      //ここから追加
+      else{
+          fadeInTarget_X[i].classList.remove('scroll-in');
+      }
+      //ここまで追加
+      
+      
+  });
+}    
+
+let fadeInTargetY = document.querySelectorAll('.FadeinY');
+
+for (let i = 0; i < fadeInTargetY.length; i++){
+
+  window.addEventListener('scroll', function(){
+      
+      const rect = fadeInTargetY[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
+      const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
+      const offset = rect + scroll; 
+      const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
+      
+    //rect(1000) + scroll(0) =offset(1000) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく　rect : scroll
+    //offset(1000) - windowHeight(800) + 200 = 400 
+
+      if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
+          fadeInTargetY[i].classList.add('scroll-in');
+      }
+      
+      
+      //ここから追加
+      else{
+          fadeInTargetY[i].classList.remove('scroll-in');
+      }
+      //ここまで追加
+      
+      
+  });
+}    
+
+window.addEventListener("scroll", function () {
+  const elm = document.querySelector(".toppoint");
+  const scroll = window.pageYOffset;
+  if (scroll > 900) {
+    elm.style.opacity = "1";
+    elm.style.zIndex = "1";
+    // console.log(scroll);
+  } else {
+    elm.style.opacity = "0";
+    elm.style.zIndex = "-1";
+    // console.log(scroll);
+  }
+});
+  </script>
+</body>
+
