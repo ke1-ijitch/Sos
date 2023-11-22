@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shimabun Office Support</title>
-  <style>
-    
+  <style type="text/css">
     html{
       font-family: 'Noto Serif JP', serif;
       margin: 0;
@@ -16,12 +15,62 @@
       text-decoration: none;
     }
 
+     /*デフォルトのマウスカーソルを非表示にする*/
+     html,body,a {
+      cursor: none;
+    }
+
+    /*独自のマウスカーソルを作成*/
+    .cursor {
+      position: fixed;
+      top: -5px;
+      left: -5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 1000;
+      transition: width 0.25s, height 0.25s, top 0.25s, left 0.25s;
+      transform: translate(0, 0);
+      pointer-events: none;
+    }
+
+    /*aタグにホバーした時に見た目変化*/
+    .cursor.cursor--hover {
+      top: -14px;
+      left: -13px;
+      width: 30px;
+      height: 30px;
+      background: rgba(205, 114, 113, 0.5);
+    }
+
+    ::-webkit-scrollbar{
+      opacity: 0;
+      width: 0;
+    }
+
     ul{
       padding: 0;
+      margin: 0;
+    }
+    
+    li{
+      padding: 0;
+      margin: 0;
     }
 
     p{
+      padding: 0;
       margin: 0;
+    }
+
+    h3{
+      padding: 0;
+      margin: 0;
+    }
+
+    h5{
+      font-size: 14px;
     }
 
     body{
@@ -40,12 +89,6 @@
     video{
       position: relative;
       width: 100%;
-    }
-
-    .cover{
-      position: absolute;
-      width: 100%;
-      z-index: 10;
     }
 
     .HeaderName{
@@ -103,11 +146,82 @@
     .HFontSize{
       font-size: 40px;
     }
+    /* ▼タブ機能の掲載領域の装飾(※必須ではありません) */
+    .tabbox { margin: 0px 50px; padding: 1em; }
+ 
+    /* ▼タブ機能を制御するラジオボタン(非表示にする) */
+    .tabbox input { display: none; }
+ 
+    /* ▼タブ(共通装飾＋非選択状態の装飾) */
+    .tab {
+       display: inline-block;
+       border-radius: 10px 10px 0px 0px;
+       padding: 20px;
+       color: rgb(255, 255, 255);
+       background-color: #46464663;
+       margin-bottom: -7px;
+    }
+ 
+    /* ▼チェックが入っているラジオボタンの隣にあるタブの装飾(＝選択状態のタブ) */
+    input:checked + .tab {
+       color: rgb(255, 255, 255);
+       background-color: #222222bb;
+       position: relative;
+       z-index: 10;
+    }
+ 
+    /* ▼タブの中身(共通装飾＋非選択状態の装飾) */
+    .tabcontent {
+       display: none;
+       margin-top: -1px;
+       padding: 20px;
+       position: relative;
+       z-index: 0;
+       background-color: #222222bb;
+    }
+ 
+    /* ▼チェックが入っているラジオボタンに対応するタブの中身を表示する */
+    #tabcheck1:checked ~ #tabcontent1 { display: block; }
+    #tabcheck2:checked ~ #tabcontent2 { display: block; }
+    #tabcheck3:checked ~ #tabcontent3 { display: block; }
+    #tabcheck4:checked ~ #tabcontent4 { display: block; }
+
+    .container {
+	position: relative;
+  width: 200px;
+  bottom: 12px;
+  background-color: rgba(0,0,0,0);
+  color: #ffffff;
+}
+
+.container p {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+  padding-right: 100px;
+	transition: 0.5s;
+}
+
+.hovercontainer p:nth-child(2) {
+	opacity: 0;
+}
+
+.hovercontainer:hover p:nth-child(1){
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.hovercontainer:hover p:nth-child(2){
+  opacity: 1;
+  transition: 0.5s;
+  color: #a099c9;
+}
 
     .inline-box {
       color: #ffffff;
       font-size: 14px;
-      width: 400px;
+      width: 1400px;
       height: 400px;
       overflow: auto;
       background: #22222200;
@@ -205,7 +319,7 @@
       z-index: 0;
       overflow: hidden;
       text-align: center;
-      margin: 150px 100px 0 100px ;
+      margin: 150px 100px 150px 100px ;
     }
 
     .fifthcontainer:before{
@@ -225,53 +339,75 @@
       z-index: -1;/*重なり順序を一番下にしておく*/
     }
 
-    /*デフォルトのマウスカーソルを非表示にする*/
-    html,body,a {
-      cursor: none;
-    }
+    table{
+    border-collapse: collapse;
+    color: #ffffff;
+    border: #999999 solid 3px;
+}
 
-    /*独自のマウスカーソルを作成*/
-    .cursor {
-      position: fixed;
-      top: -5px;
-      left: -5px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.7);
-      z-index: 1000;
-      transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
-      transform: translate(0, 0);
-      pointer-events: none;
-    }
+td{
+    border: 1px solid #99999980;
+    text-align: center;
+    padding: 10px;
+}
 
-    /*aタグにホバーした時に見た目変化*/
-    .cursor.cursor--hover {
-      top: -20px;
-      left: -20px;
-      width: 40px;
-      height: 40px;
-      background: rgba(205, 114, 113, 0.5);
-    }
+th{
+    border: 1px solid #99999980;
+    text-align: center;
+    padding: 10px;
+    background-color: #99999941;
+    font-weight: normal;
+}
 
-    /*動き確認用ボタン*/
-    .btn {
-      display: inline-block;
-      min-width: 300px;
-      margin: 20px;
-      padding: 20px;
-      color: #fff;
-      background-color: #000;
-      font-size: 20px;
-      font-weight: bold;
-      text-decoration: none;
-      text-align: center;
-    }
+    .link{
+  transition: 0.5s;
+}
+
+.link:hover{
+  color:#a099c9;
+  transition: 0.5s;
+}
+
+.contact{
+  transition: 0.5s;
+}
+
+.contact:hover{
+  color: #a099c9;
+  transition: 0.5s;
+}
+
+.sitemap{
+  transition: 0.5s;
+}
+
+.sitemap:hover{
+  color: #a099c9;
+  transition: 0.5s;
+}
+
+.privacypolicy{
+  transition: 0.5s;
+}
+
+.privacypolicy:hover{
+  color: #a099c9;
+  transition: 0.5s;
+}
+
+.sitepolicy{
+  transition: 0.5s;
+}
+
+.sitepolicy:hover{
+  color:#a099c9;
+  transition: 0.5s;
+}
 
     .FadeinX{
       opacity: 0;
     transition-duration: .5s;
-    transform: translateX(-100px);
+    transform: translateX(-50px);
     transition: 1.5s;
     }
 
@@ -283,7 +419,7 @@
 .Fadein-X{
     opacity: 0;
     transition-duration: .5s;
-    transform: translateX(100px);
+    transform: translateX(50px);
     transition: 1.5s;
     }
 
@@ -303,251 +439,461 @@
     opacity: 1;
     transform: translate(0);
 }  
-  </style>
+ </style>
 </head>
 <body>
   <div id="cursor" class="cursor"></div>
   <header>
     <div class="HeaderBox">
-      <video src="SosTopMovie-b.mp4" autoplay loop muted class="HeaderMp4" style="position: fixed; z-index: -100;"></video>
+      <video src="SosTopMovie-b.mp4" autoplay loop muted class="HeaderMp4" style="position: fixed; z-index: -100; overflow: hidden;"></video>
       <div>
         <p class="HeaderName"><span class="HFontSize">Shimabun</span> Office Support</p>
       </div>
     </div>
-    <a href=""><div class="pointanim" style="text-align: right; position: relative; right: 100px; bottom: 250px; margin-bottom: -150px;">
+    <div class="pointanim" style="text-align: right; position: relative; right: 100px; bottom: 250px; margin-bottom: -150px;">
       <div class="virticalbar" style="border-left:#ffffff solid 1px; height: 70px; display: inline-block;"></div>
       <div class="allowbar" style="border-left:#ffffff solid 1px; height: 40px; display: inline-block; transform: rotate(30deg);"></div>
-    </div></a>
+    </div>
     <a href=""><div class="toppoint" style="text-align: right; position: fixed; right: 100px; bottom: 200px; margin-bottom: -150px; transition: .5s; opacity: 0;">
       <div style="border-left:#ffffff solid 1px; height: 100px; display: inline-block;"></div>
       <div style="border-left:#ffffff solid 1px; height: 40px; display: inline-block; transform: rotate(150deg); position: relative; bottom: 60px;"></div>
       <p style="color: #ffffff; position: relative;left: 12px; transform: rotate(90deg);">TOP</p>
     </div></a>
   </header>
-  <div class="contents-container" style="background-color: #222222bb; margin: 0 50px 0 50px; padding-top: 100px;">
-    <div class="firstcotainer">
-      <div class="FadeinY" style="display: flex; justify-content: center; align-items:center; gap: 100px; margin: 0  200px 100px 200px;">
-        <div class="inline-box">
-          <ul>
-            <li>
-              <p>2023.11.20</p>
-              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
-              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
-              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
-              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
-              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
-            </li>
-            <li>
-              <p>2023.11.20</p>
-              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
-              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
-              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
-              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
-              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
-            </li>
-            <li>
-              <p>2023.11.20</p>
-              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
-              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
-              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
-              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
-              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
-            </li>
-            <li>
-              <p>2023.11.20</p>
-              <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
-              <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
-              <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
-              <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
-              <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
-            </li>
-          </ul>
+  <div class="tabbox">
+    <input type="radio" name="tabset" id="tabcheck1" checked><label for="tabcheck1" class="tab"><div class="hovercontainer">
+      <div class="container">
+        <p>ANNOUNCE</p>
+        <p>連絡事項</p>
+      </div>
+    </div></label>
+    <input type="radio" name="tabset" id="tabcheck2"        ><label for="tabcheck2" class="tab"><div class="hovercontainer">
+      <div class="container">
+        <p>FORMAT</p>
+        <p>連絡用紙</p>
+      </div>
+    </div></label>
+    <input type="radio" name="tabset" id="tabcheck3"        ><label for="tabcheck3" class="tab"><div class="hovercontainer">
+      <div class="container">
+        <p>DOCUMENT</p>
+        <p>資料</p>
+      </div>
+    </div></label>
+    <input type="radio" name="tabset" id="tabcheck4"        ><label for="tabcheck4" class="tab"><div class="hovercontainer">
+      <div class="container">
+        <p>STUFF</p>
+        <p>スタッフ</p>
+      </div>
+    </div></label>
+    <div class="tabcontent" id="tabcontent1"><div class="contents-container" style="padding-top: 100px;">
+      <div class="firstcotainer">
+        <div class="FadeinY" style="display: flex; justify-content: center; margin: 0  50px 50px 50px;">
+          <div class="inline-box">
+            <ul>
+              <li>
+                <p>2023.11.20</p>
+                <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+                <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+                <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+                <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+                <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+              </li>
+              <li>
+                <p>2023.11.20</p>
+                <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+                <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+                <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+                <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+                <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+              </li>
+              <li>
+                <p>2023.11.20</p>
+                <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+                <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+                <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+                <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+                <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+              </li>
+              <li>
+                <p>2023.11.20</p>
+                <h3><span style="color: rgb(252, 184, 37);">【重要】</span>本社システム機器更新に伴う機器停止のお知らせ</h3>
+                <h4>以下の日時で本社ビルのシステム機器更新に伴う機器停止を行います。</h4>
+                <h5>・日　時：2023年04月9日(日) 9:00 ～ 12:00</h5>
+                <p>上記時間帯は、情報システムの全サービスが使用出来ません。</p>
+                <p style="border-bottom: #999999 solid 1px; padding-bottom: 40px; margin-bottom: 40px;">電子メール、Web閲覧、共有フォルダ、サイボウズ、リモート接続等が利用できなくなります。ご理解の程、宜しくお願い致します。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="Fadein-X" style="display: flex; justify-content: center; align-items: center; padding-bottom: 100px;">
+          <div class="titleline" style="border-left: #ffffff solid 1px; height: 70px;  transform: rotate(90deg);"></div>
+          <div style="color: #ffffff;padding-left: 40px; font-size: 25px;">ABOUT US</div>
+        </div>
+      </div>
+      <div class="secondcontainer">
+        <div class="SoftwareBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+          <div class="FadeinX" >
+            <div class="SoftwareFlex" style="display: flex; align-items: last baseline; justify-content: center;">
+              <a href=""><img src="software.jpeg" alt=""  style="width:450px;  box-shadow: 0 0 8px black;"></a>
+              <div class="SoftwareBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 20px; padding-top: 25px; position: relative; right: 20px; margin-right: -2vw; box-shadow: 0 0 8px black;">
+                <h3 class="Software" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px; margin-bottom: 10px;">SOFTWARE</h3>
+                <p class="SoftwareDetails" style="width: 300px;">ソフトウェアの開発・保守・運用</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="thirdcontainer">
+        <div class="ComputerBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+          <div class="Fadein-X" >
+            <div class="ComputerFlex" style="display: flex; align-items: last baseline; justify-content: center;">
+              <div class="ComputerBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 20px; padding-top: 25px; position: relative;left: 20px; box-shadow: 0 0 8px black;">
+                <h3 class="Computer" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px; margin-bottom: 10px;">COMPUTER</h3>
+                <p class="ComputerDetails" style="width: 300px;">コンピュータ機器の運用</p>
+              </div>
+              <a href=""><img src="computer.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fourthcontainer">
+        <div class="NetworkBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+          <div class="FadeinX" >
+            <div class="NetworkFlex" style="display: flex; align-items: last baseline; justify-content: center;" >
+              <a href=""><img src="network.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
+              <div class="NetworkBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 20px; padding-top: 25px; position: relative; right: 20px; margin-right: -2vw; box-shadow: 0 0 8px black;">
+                <h3 class="Network" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px; margin-bottom: 10px;">NETWORK</h3>
+                <p class="NetworkDetails" style="width: 300px;">管理情報通信ネットワークの運用・管理</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fifthcontainer">
+        <div class="CreativeBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
+          <div class="Fadein-X" >
+            <div class="CreativeFlex" style="display: flex; align-items: last baseline; justify-content: center;">
+              <div class="CreativeBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 20px; padding-top: 25px; position: relative;left: 20px; box-shadow: 0 0 8px black;">
+                <h3 class="Creative" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px; margin-bottom: 10px;">CREATIVE</h3>
+                <p class="CreativeDetails" style="width: 300px;">WEBデザイン・バナーやポスターなどのデザイン・HP改修</p>
+              </div>
+              <a href=""><img src="Creative.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div style="display: flex; justify-content: center; gap: 100px; align-items: stretch;">
+          <div class="FadeinX">
+            <img src="honsya.jpg" alt="" width="450px" style="border-radius: 10px; vertical-align: top;">
+          </div>
+          <div class="Fadein-X" style="color: #ffffff; background-color: #99999941; width: 450px; border-radius: 10px; text-align: center; padding: 25px;">
+            <h3 style="padding-bottom: 20px;">会社情報</h3>
+            <div style="text-align: left;">
+              <ul style="list-style: none;">
+                <li>
+                  <p style="padding-bottom: 30px;">Address：########################################</p>
+                  <p style="padding-bottom: 30px;">TEL：###-####-####</p>
+                  <p style="padding-bottom: 30px;">EXT：###</p>
+                  <p>MAIL：##############@###########</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div>
-          <ul style="list-style: none; background-color: #99999941; display: inline-block; padding: 20px 20px 20px 20px; border-radius: 10px; width: 200px; height: 400px;">
-            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 0 20px 10px 0; background-color: #99999900;"><p>Announce<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 100px;">&#9698;</span></p></li></a>
-            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 10px 20px 10px 0; background-color: #99999900;"><p>Format<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 122px;">&#9698;</span></p></li></a>
-            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 10px 20px 10px 0; background-color: #99999900;"><p>Document<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 98px;">&#9698;</span></p></li></a>
-            <a href="" style="color: #ffffff;"><li style="border-bottom: #ffffff solid 1px; padding: 10px 20px 10px 0; background-color: #99999900;"><p>Stuff<span style="display: inline-block; transform: rotate(-45deg) scale(0.5); position: relative; left: 139px;">&#9698;</span></p></li></a>
+          <div style="border-top:solid 1px #ffffff41; margin-left: 100px; margin-right: 100px; margin-top: 150px; font-size: 20px;">
+            <ul style="display: flex;justify-content: center; list-style: none; color: #ffffff; text-align: center; margin-top: 50px; padding-bottom: 50px;">
+              <li class="link" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Link</li>
+              <li class="contact" style="width: 170px;">Contact</li>
+              <li class="sitemap" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ;width: 170px;">Site Map</li>
+              <li class="privacypolicy" style="width: 170px;">Privacy Policy</li>
+              <li class="sitepolicy" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Site Policy</li>
+            </ul>
+          </div>
+        </div>
+        <div style="text-align: center; margin-bottom: 50px; padding-bottom: 50px;">
+          <p style="color: #ffffff; font-size: 14px;">Copyright ##############,LTD.All rights reserved.</p>
+        </div>
+      </div>
+    </div></div>
+    <div class="tabcontent" id="tabcontent2"><div class="maincontainer" style="margin: 50px 50px 0 50px; padding-top: 100px;">
+      <div style="display: flex; justify-content: center; gap: 100px; padding-bottom: 100px;">
+          <table>
+              <tr>
+                  <th>CLASS</th><th>NO.</th><th>UPDATE</th><th>NAME</th><th>DOCUMENT</th><th>CREATEWEB</th>
+              </tr>
+              <tr>
+                  <th rowspan="3" style="writing-mode: vertical-rl; text-align: center;">MASTER</th><th>1</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">仕入先マスター　登録（変更）依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>2</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">得意先マスター　登録（変更）依頼書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>3</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">需要家マスター　登録（変更）依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th rowspan="8" style="writing-mode: vertical-rl; text-align: center;">REQUESTS</th><th>4</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">プログラム　作成・変更　依頼書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>5</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">データ　作成・修正・変更　依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>6</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">メールアカウント使用（設定）　申請書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>7</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">Ｗｅｂメール使用　申請書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>8</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">業務使用サイト使用　申請書　</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>9</th><th>2023.01.17</th><td style="text-align: left;"><a href="yousi/assagyo.docx" style="text-decoration: none; color: #ffffff;">ＡＳ 作業依頼書</a></td><td><a href="yousi/assagyo.docx" style="text-decoration: none; color: #ffffff;">○</a></td><td></td>
+              </tr>
+              <tr>
+                  <th>10</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">海外ＷｉＦｉ手配　申請書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>11</th><th>2023.01.17</th><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">会社補助申請書（レクリエーション費・忘年会費）</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+          </table>
+      </div>
+      <div>
+        <div style="border-top:solid 1px #ffffff41; margin-left: 100px; margin-right: 100px; margin-top: 150px; font-size: 20px;">
+          <ul style="display: flex;justify-content: center; list-style: none; color: #ffffff; text-align: center; margin-top: 50px; padding-bottom: 50px;">
+            <li class="link" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Link</li>
+            <li class="contact" style="width: 170px;">Contact</li>
+            <li class="sitemap" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ;width: 170px;">Site Map</li>
+            <li class="privacypolicy" style="width: 170px;">Privacy Policy</li>
+            <li class="sitepolicy" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Site Policy</li>
           </ul>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="Fadein-X" style="display: flex; justify-content: center; align-items: center; padding-bottom: 100px;">
-        <div class="titleline" style="border-left: #ffffff solid 1px; height: 70px;  transform: rotate(90deg);"></div>
-        <div style="color: #ffffff;padding-left: 40px; font-size: 25px;">ABOUT US</div>
+      <div style="text-align: center; margin-bottom: 50px; padding-bottom: 50px;">
+        <p style="color: #ffffff; font-size: 14px;">Copyright ##############,LTD.All rights reserved.</p>
       </div>
-    </div>
-    <div class="secondcontainer">
-      <div class="SoftwareBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
-        <div class="FadeinX" >
-          <div class="SoftwareFlex" style="display: flex; align-items: last baseline; justify-content: center;">
-            <a href=""><img src="software.jpeg" alt=""  style="width:450px;  box-shadow: 0 0 8px black;"></a>
-            <div class="SoftwareBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative; right: 20px; margin-right: -2vw; box-shadow: 0 0 8px black;">
-              <h3 class="Software" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">SOFTWARE</h3>
-              <p class="SoftwareDetails" style="width: 300px;">ソフトウェアの開発・保守・運用</p>
-            </div>
-          </div>
+    </div></div>
+    <div class="tabcontent" id="tabcontent3"><div class="maincontainer" style="margin: 50px 50px 0 50px; padding-top: 100px;">
+      <div style="display: flex; justify-content: center; gap: 100px; padding-bottom: 100px;">
+          <table>
+              <tr>
+                  <th>CLASS</th><th>NO.</th><th>UPDATE</th><th>NAME</th><th>DOCUMENT</th><th>CREATEWEB</th>
+              </tr>
+              <tr>
+                  <th rowspan="3" style="writing-mode: vertical-rl; text-align: center;">MASTER</th><th>1</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">仕入先マスター　登録（変更）依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>2</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">得意先マスター　登録（変更）依頼書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>3</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">需要家マスター　登録（変更）依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th rowspan="8" style="writing-mode: vertical-rl; text-align: center;">REQUESTS</th><th>4</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">プログラム　作成・変更　依頼書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>5</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">データ　作成・修正・変更　依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>6</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">メールアカウント使用（設定）　申請書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>7</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">Ｗｅｂメール使用　申請書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>8</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">業務使用サイト使用　申請書　</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>9</th><th>2023.01.17</th><td style="text-align: left;"><a href="yousi/assagyo.docx" style="text-decoration: none; color: #ffffff;">ＡＳ 作業依頼書</a></td><td><a href="yousi/assagyo.docx" style="text-decoration: none; color: #ffffff;">○</a></td><td></td>
+              </tr>
+              <tr>
+                  <th>10</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">海外ＷｉＦｉ手配　申請書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>11</th><th>2023.01.17</th><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">会社補助申請書（レクリエーション費・忘年会費）</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+          </table>
+      </div>
+      <div>
+        <div style="border-top:solid 1px #ffffff41; margin-left: 100px; margin-right: 100px; margin-top: 150px; font-size: 20px;">
+          <ul style="display: flex;justify-content: center; list-style: none; color: #ffffff; text-align: center; margin-top: 50px; padding-bottom: 50px;">
+            <li class="link" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Link</li>
+            <li class="contact" style="width: 170px;">Contact</li>
+            <li class="sitemap" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ;width: 170px;">Site Map</li>
+            <li class="privacypolicy" style="width: 170px;">Privacy Policy</li>
+            <li class="sitepolicy" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Site Policy</li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class="thirdcontainer">
-      <div class="ComputerBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
-        <div class="Fadein-X" >
-          <div class="ComputerFlex" style="display: flex; align-items: last baseline; justify-content: center;">
-            <div class="ComputerBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative;left: 20px; box-shadow: 0 0 8px black;">
-              <h3 class="Computer" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">COMPUTER</h3>
-              <p class="ComputerDetails" style="width: 300px;">コンピュータ機器の運用</p>
-            </div>
-            <a href=""><img src="computer.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
-          </div>
+      <div style="text-align: center; margin-bottom: 50px; padding-bottom: 50px;">
+        <p style="color: #ffffff; font-size: 14px;">Copyright ##############,LTD.All rights reserved.</p>
+      </div>
+    </div></div>
+    <div class="tabcontent" id="tabcontent4"><div class="maincontainer" style="margin: 50px 50px 0 50px; padding-top: 100px;">
+      <div style="display: flex; justify-content: center; gap: 100px; padding-bottom: 100px;">
+          <table>
+              <tr>
+                  <th>CLASS</th><th>NO.</th><th>UPDATE</th><th>NAME</th><th>DOCUMENT</th><th>CREATEWEB</th>
+              </tr>
+              <tr>
+                  <th rowspan="3" style="writing-mode: vertical-rl; text-align: center;">MASTER</th><th>1</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">仕入先マスター　登録（変更）依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>2</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">得意先マスター　登録（変更）依頼書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>3</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">需要家マスター　登録（変更）依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th rowspan="8" style="writing-mode: vertical-rl; text-align: center;">REQUESTS</th><th>4</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">プログラム　作成・変更　依頼書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>5</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">データ　作成・修正・変更　依頼書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>6</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">メールアカウント使用（設定）　申請書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>7</th><th>2023.01.17</th><td style="text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">Ｗｅｂメール使用　申請書</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>8</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">業務使用サイト使用　申請書　</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>9</th><th>2023.01.17</th><td style="text-align: left;"><a href="yousi/assagyo.docx" style="text-decoration: none; color: #ffffff;">ＡＳ 作業依頼書</a></td><td><a href="yousi/assagyo.docx" style="text-decoration: none; color: #ffffff;">○</a></td><td></td>
+              </tr>
+              <tr>
+                  <th>10</th><th>2023.01.17</th><td style="background-color: #a099c93f; text-align: left;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">海外ＷｉＦｉ手配　申請書</a></td><td style="background-color: #a099c93f;"></td><td style="background-color: #a099c93f;"><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+              <tr>
+                  <th>11</th><th>2023.01.17</th><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">会社補助申請書（レクリエーション費・忘年会費）</a></td><td></td><td><a href="https://shimabun.createwebflow-cloud.jp/XFV20/apply/list" style="text-decoration: none; color: #ffffff;">○</a></td>
+              </tr>
+          </table>
+      </div>
+      <div>
+        <div style="border-top:solid 1px #ffffff41; margin-left: 100px; margin-right: 100px; margin-top: 150px; font-size: 20px;">
+          <ul style="display: flex;justify-content: center; list-style: none; color: #ffffff; text-align: center; margin-top: 50px; padding-bottom: 50px;">
+            <li class="link" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Link</li>
+            <li class="contact" style="width: 170px;">Contact</li>
+            <li class="sitemap" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ;width: 170px;">Site Map</li>
+            <li class="privacypolicy" style="width: 170px;">Privacy Policy</li>
+            <li class="sitepolicy" style="border-left:1px solid #ffffff41 ; border-right:1px solid #ffffff41 ; width: 170px;">Site Policy</li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class="fourthcontainer">
-      <div class="NetworkBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
-        <div class="FadeinX" >
-          <div class="NetworkFlex" style="display: flex; align-items: last baseline; justify-content: center;" >
-            <a href=""><img src="network.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
-            <div class="NetworkBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative; right: 20px; margin-right: -2vw; box-shadow: 0 0 8px black;">
-              <h3 class="Network" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">NETWORK</h3>
-              <p class="NetworkDetails" style="width: 300px;">管理情報通信ネットワークの運用・管理</p>
-            </div>
-          </div>
-        </div>
+      <div style="text-align: center; margin-bottom: 50px; padding-bottom: 50px;">
+        <p style="color: #ffffff; font-size: 14px;">Copyright ##############,LTD.All rights reserved.</p>
       </div>
-    </div>
-    <div class="fifthcontainer">
-      <div class="CreativeBox" style="width: 300px; margin: 0 auto; display: inline-block; padding-top: 45px;padding-bottom: 40px;">
-        <div class="Fadein-X" >
-          <div class="CreativeFlex" style="display: flex; align-items: last baseline; justify-content: center;">
-            <div class="CreativeBlock" style="background-color: #fcfaff; text-align: left; padding-left: 35px; padding-right: 7vw; padding-bottom: 30px; padding-top: 10px; position: relative;left: 20px; box-shadow: 0 0 8px black;">
-              <h3 class="Creative" style="border-left: #25148C solid 5px; display: inline-block; padding-left: 10px;padding-right: 15px;">CREATIVE</h3>
-              <p class="CreativeDetails" style="width: 300px;">WEBデザイン・バナーやポスターなどのデザイン・HP改修</p>
-            </div>
-            <a href=""><img src="Creative.jpeg" alt=""  style="width:450px; box-shadow: 0 0 8px black;"></a>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div></div>
   </div>
-  <footer style="background-color: #25148C; width: 100%;">
-    <div>
-        <div>
-          <div></div>
-        </div>
-        <div>
-
-        </div>
-    </div>
-  </footer>
-  <script>
-    // カーソル用のdivタグを取得してcursorに格納
+    <script>
+       // カーソル用のdivタグを取得してcursorに格納
     var cursor = document.getElementById('cursor'); 
 
-    // カーソル用のdivタグをマウスに追従させる
-    document.addEventListener('mousemove', function (e) {
-        cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
+// カーソル用のdivタグをマウスに追従させる
+document.addEventListener('mousemove', function (e) {
+    cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px)';
+});
+
+// リンクにホバーした時にクラス追加、離れたらクラス削除
+var link = document.querySelectorAll('a');
+for (var i = 0; i < link.length; i++) {
+    link[i].addEventListener('mouseover', function (e) {
+        cursor.classList.add('cursor--hover');
     });
+    link[i].addEventListener('mouseout', function (e) {
+        cursor.classList.remove('cursor--hover');   
+    });
+}
 
-    // リンクにホバーした時にクラス追加、離れたらクラス削除
-    var link = document.querySelectorAll('a');
-    for (var i = 0; i < link.length; i++) {
-        link[i].addEventListener('mouseover', function (e) {
-            cursor.classList.add('cursor--hover');
-        });
-        link[i].addEventListener('mouseout', function (e) {
-            cursor.classList.remove('cursor--hover');   
-        });
-    }
+let fadeInTargetX = document.querySelectorAll('.FadeinX');
 
-    let fadeInTargetX = document.querySelectorAll('.FadeinX');
-
-    for (let i = 0; i < fadeInTargetX.length; i++){
-
-      window.addEventListener('scroll', function(){
-          
-          const rect = fadeInTargetX[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
-          const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
-          const offset = rect + scroll; 
-          const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
-          
-          //rect(1000) + scroll(300) =offset(1300) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく
-          //offset(1300) - windowHeight(800) + 200 = 700 
-
-          if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
-              fadeInTargetX[i].classList.add('scroll-in');
-          }
-          
-          
-          //ここから追加
-          else{
-              fadeInTargetX[i].classList.remove('scroll-in');
-          }
-          //ここまで追加
-          
-          
-      });
-    }
-
-    let fadeInTarget_X = document.querySelectorAll('.Fadein-X');
-
-for (let i = 0; i < fadeInTarget_X.length; i++){
+for (let i = 0; i < fadeInTargetX.length; i++){
 
   window.addEventListener('scroll', function(){
       
-      const rect = fadeInTarget_X[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
+      const rect = fadeInTargetX[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
       const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
       const offset = rect + scroll; 
       const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
       
-    //rect(1000) + scroll(0) =offset(1000) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく　rect : scroll
-    //offset(1000) - windowHeight(800) + 200 = 400 
+      //rect(1000) + scroll(300) =offset(1300) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく
+      //offset(1300) - windowHeight(800) + 200 = 700 
 
       if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
-          fadeInTarget_X[i].classList.add('scroll-in');
+          fadeInTargetX[i].classList.add('scroll-in');
       }
       
       
       //ここから追加
       else{
-          fadeInTarget_X[i].classList.remove('scroll-in');
+          fadeInTargetX[i].classList.remove('scroll-in');
       }
       //ここまで追加
       
       
   });
+}
+
+let fadeInTarget_X = document.querySelectorAll('.Fadein-X');
+
+for (let i = 0; i < fadeInTarget_X.length; i++){
+
+window.addEventListener('scroll', function(){
+  
+  const rect = fadeInTarget_X[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
+  const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
+  const offset = rect + scroll; 
+  const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
+  
+//rect(1000) + scroll(0) =offset(1000) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく　rect : scroll
+//offset(1000) - windowHeight(800) + 200 = 400 
+
+  if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
+      fadeInTarget_X[i].classList.add('scroll-in');
+  }
+  
+  
+  //ここから追加
+  else{
+      fadeInTarget_X[i].classList.remove('scroll-in');
+  }
+  //ここまで追加
+  
+  
+});
 }    
 
 let fadeInTargetY = document.querySelectorAll('.FadeinY');
 
 for (let i = 0; i < fadeInTargetY.length; i++){
 
-  window.addEventListener('scroll', function(){
-      
-      const rect = fadeInTargetY[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
-      const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
-      const offset = rect + scroll; 
-      const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
-      
-    //rect(1000) + scroll(0) =offset(1000) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく　rect : scroll
-    //offset(1000) - windowHeight(800) + 200 = 400 
+window.addEventListener('scroll', function(){
+  
+  const rect = fadeInTargetY[i].getBoundingClientRect().top; //ページの一番上から対象の要素の一番上の位置までの量を取得  
+  const scroll = window.pageYOffset; //画面をスクロールした時のスクロール量を取得
+  const offset = rect + scroll; 
+  const windowHeight = window.innerHeight; //ページが表示されている高さ（単純にwindowの高さ　定数）
+  
+//rect(1000) + scroll(0) =offset(1000) rect（変数）はスクロールすれば減っていく、scroll（変数）はスクロールすれば増えていく　rect : scroll
+//offset(1000) - windowHeight(800) + 200 = 400 
 
-      if(scroll > offset - windowHeight + 200){  //要素のtopがwindow内に入ってからスクロールした量
-          fadeInTargetY[i].classList.add('scroll-in');
-      }
-      
-      
-      //ここから追加
-      else{
-          fadeInTargetY[i].classList.remove('scroll-in');
-      }
-      //ここまで追加
-      
-      
-  });
-}    
+  if(scroll > offset - windowHeight + 150){  //要素のtopがwindow内に入ってからスクロールした量
+      fadeInTargetY[i].classList.add('scroll-in');
+  }
+  
+  
+  //ここから追加
+  else{
+      fadeInTargetY[i].classList.remove('scroll-in');
+  }
+  //ここまで追加
+  
+  
+});
+}   
 
 window.addEventListener("scroll", function () {
   const elm = document.querySelector(".toppoint");
@@ -562,6 +908,5 @@ window.addEventListener("scroll", function () {
     // console.log(scroll);
   }
 });
-  </script>
+    </script>
 </body>
-
